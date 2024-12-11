@@ -24,11 +24,10 @@ public class AddressController {
         addressService.addAddress(addressDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Address added successfully"));
     }
+
     @PutMapping("/update")
     public ResponseEntity updateAddress(@RequestBody @Valid AddressDTO addressDTO){
         addressService.updateAddress(addressDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("Address added successfully"));
+        return ResponseEntity.status(200).body(new ApiResponse("Address updated successfully"));
     }
-
-
 }

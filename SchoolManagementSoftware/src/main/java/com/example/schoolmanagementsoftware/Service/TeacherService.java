@@ -42,6 +42,9 @@ public class TeacherService {
             throw new ApiException("Teacher ID Not Found");
         }
         Address address = addressRepository.findAddressById(id);
+        if(address==null){
+            throw new ApiException("Address ID Not Found");
+        }
         teacher.setAddress(null);
         addressRepository.delete(address);
         teacherRepository.delete(teacher);

@@ -18,12 +18,16 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final TeacherRepository teacherRepository;
 
+    public List<Address> getAllAddresses() {
+        return addressRepository.findAll();
+    }
+
     public void addAddress(AddressDTO addressDTO) {
         Teacher teacher = teacherRepository.findTeacherById(addressDTO.getTeacher_id());
         if (teacher == null) {
             throw new ApiException("Teacher ID Not found");
         }
-        Address address = new Address(addressDTO.getTeacher_id(), addressDTO.getArea(), addressDTO.getStreet(), addressDTO.getBuildingNumber(), teacher);
+        Address address = new Address(null, addressDTO.getArea(), addressDTO.getStreet(), addressDTO.getBuildingNumber(), teacher);
         addressRepository.save(address);
     }
 
@@ -33,12 +37,9 @@ public class AddressService {
             throw new ApiException("address not found");
         }
         address.setArea(addressDTO.getArea());
-        address.setStreet(address.getStreet());
-        address.setBuildingNumber(address.getBuildingNumber());
+        address.setStreet(addressDTO.getStreet());
+        address.setBuildingNumber(addressDTO.getBuildingNumber());
         addressRepository.save(address);
     }
 
-    public List<Address> getAllAddresses() {
-        return addressRepository.findAll();
-    }
 }
