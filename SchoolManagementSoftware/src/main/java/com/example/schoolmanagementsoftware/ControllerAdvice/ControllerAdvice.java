@@ -41,7 +41,7 @@ public class ControllerAdvice {
     public ResponseEntity JpaSystemException(JpaSystemException e){
         return ResponseEntity.status(400).body(e.getMessage());
     }
-    
+
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity MethodArgumentNotValidException(MethodArgumentNotValidException e){
         return ResponseEntity.status(400).body(e.getMessage());

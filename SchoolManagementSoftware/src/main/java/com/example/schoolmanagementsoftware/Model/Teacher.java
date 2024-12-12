@@ -9,6 +9,8 @@ import lombok.NonNull;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.Check;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,5 +42,8 @@ public class Teacher {
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    private Set<Course> courses;
 
 }
