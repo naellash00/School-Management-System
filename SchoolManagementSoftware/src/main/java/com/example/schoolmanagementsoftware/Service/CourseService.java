@@ -43,4 +43,12 @@ public class CourseService {
         }
         courseRepository.delete(course);
     }
+
+    public String getTeacherNameByCourse(Integer course_id){
+        Course course = courseRepository.findCourseById(course_id);
+        if(course == null){
+            throw new ApiException("Course Not Found");
+        }
+        return course.getTeacher().getName();
+    }
 }
