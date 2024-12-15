@@ -38,6 +38,24 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    public void updateStudent(Integer id, Student student){
+        Student oldStudent = studentRepository.findStudentById(id);
+        if(oldStudent == null){
+            throw new ApiException("student not found");
+        }
+        oldStudent.setName(student.getName());
+        student.setAge(student.getAge());
+        student.setMajor(student.getMajor());
+        studentRepository.save(student);
+    }
+    public void deleteStudent(Integer id){
+        Student student = studentRepository.findStudentById(id);
+        if(student == null){
+            throw new ApiException("student not found");
+        }
+        studentRepository.delete(student);
+    }
+
     public void enrollInCourse(Integer student_id, Integer course_id){
         // check student and copurse id
         Student student = studentRepository.findStudentById(student_id);
@@ -57,8 +75,12 @@ public class StudentService {
         if(student == null){
             throw new ApiException("student not found");
         }
+        for(Course course : student.getCourses()){
+            course.getStudents().remove(student);
+        }
         student.setMajor(major);
-        student.setCourses(null);
+        student.getCourses().clear();
+        //student.setCourses(null);
         studentRepository.save(student);
     }
 }

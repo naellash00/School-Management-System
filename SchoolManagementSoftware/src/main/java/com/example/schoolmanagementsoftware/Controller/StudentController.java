@@ -25,6 +25,18 @@ public class StudentController {
         return ResponseEntity.status(200).body(new ApiResponse("student added successfully"));
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateStudent(@PathVariable Integer id, @RequestBody @Valid Student student){
+        studentService.updateStudent(id, student);
+        return ResponseEntity.status(200).body("student updated successfully");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteStudent(@PathVariable Integer id){
+        studentService.deleteStudent(id);
+        return ResponseEntity.status(200).body("deleted successfully");
+    }
+
     @PutMapping("/enroll/{student_id}/{course_id}")
     public ResponseEntity enrollInCourse(@PathVariable Integer student_id, @PathVariable Integer course_id){
         studentService.enrollInCourse(student_id, course_id);
