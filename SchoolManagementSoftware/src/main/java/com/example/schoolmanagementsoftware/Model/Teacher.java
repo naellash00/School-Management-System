@@ -21,21 +21,21 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "name cannot be empty")
-    @Size(min = 3, max = 10, message = "name must be between 3-10 letters")
+//    @NotEmpty(message = "name cannot be empty")
+//    @Size(min = 3, max = 10, message = "name must be between 3-10 letters")
     @Column(columnDefinition = "varchar(10) not null")
     private String name;
 
-    @Min(value = 20, message = "age cannot be less than 20")
+//    @Min(value = 20, message = "age cannot be less than 20")
     @Column(columnDefinition = "int not null")
     private Integer age;
 
-    @NotEmpty(message = "email cannot be empty")
-    @Email(message = "enter a valid email")
+//    @NotEmpty(message = "email cannot be empty")
+//    @Email(message = "enter a valid email")
     @Column(columnDefinition = "varchar(30) not null unique")
     private String email;
 
-    @Positive(message = "salary must be positive")
+//    @Positive(message = "salary must be positive")
     @Column(columnDefinition = "int not null")
     private Integer salary;
 
@@ -45,5 +45,4 @@ public class Teacher {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<Course> courses;
-
 }

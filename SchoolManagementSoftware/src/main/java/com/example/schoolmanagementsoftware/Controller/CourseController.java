@@ -41,4 +41,9 @@ public class CourseController {
         String name = courseService.getTeacherNameByCourse(course_id);
         return ResponseEntity.status(200).body(name);
     }
+
+    @GetMapping("/get/{course_id}")
+    public ResponseEntity getStudentsInCourse(@PathVariable Integer course_id){
+        return ResponseEntity.status(200).body(courseService.getStudentsInCourse(course_id));
+    }
 }

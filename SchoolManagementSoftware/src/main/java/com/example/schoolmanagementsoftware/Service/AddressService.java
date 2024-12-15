@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,8 +19,18 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final TeacherRepository teacherRepository;
 
-    public List<Address> getAllAddresses() {
-        return addressRepository.findAll();
+//    public List<Address> getAllAddresses() {
+//        return addressRepository.findAll();
+//    }
+
+    public List<AddressDTO> getAllAddresses(){
+        List<Address> addresses = addressRepository.findAll();
+        List<AddressDTO> addressDTOS = new ArrayList<>();
+        for(Address a : addresses){
+            AddressDTO addressDTO = new AddressDTO(a.getId(), a.getArea(), a.getStreet(), a.getBuildingNumber());
+            addressDTOS.add(addressDTO);
+        }
+        return addressDTOS;
     }
 
     public void addAddress(AddressDTO addressDTO) {
